@@ -12,7 +12,7 @@ var game = {
 	// Run on page load.
 	"onload" : function () {
 	// Initialize the video.
-	if (!me.video.init("screen", 480, 320, true, 'auto')) {
+	if (!me.video.init("screen", 1067, 600, true, 1.0)) {
 		alert("Your browser does not support HTML5 canvas.");
 		return;
 	}
@@ -41,7 +41,11 @@ var game = {
 	"loaded" : function () {
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
-
+                
+                me.entityPool.add("player", game.PlayerEntity);
+                
+                me.input.bindKey(me.input.KEY.RIGHT, "right");
+                me.input.bindKey(me.input.KEY.UP, "jump");
 		// Start the game.
 		me.state.change(me.state.PLAY);
 	}
