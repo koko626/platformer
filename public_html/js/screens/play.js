@@ -8,8 +8,7 @@ game.PlayScreen = me.ScreenObject.extend({
                 
                 me.levelDirector.loadLevel("level01");
                 
-                var player = new game.PlayerEntity(0, 300, {});
-                me.game.add(player, this.z);
+                this.resetPlayer();
                 
 
 		// add our HUD to the game world
@@ -24,5 +23,10 @@ game.PlayScreen = me.ScreenObject.extend({
 	onDestroyEvent: function() {
 		// remove the HUD from the game world
 		me.game.world.removeChild(this.HUD);
-	}
+	},
+                
+        resetPlayer: function(x, y) {
+               var player = me.pool.pull("player", 0, 300, {});
+               me.game.world.addChild(player, 3);
+        }        
 });
